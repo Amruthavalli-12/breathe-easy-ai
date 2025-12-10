@@ -1,0 +1,109 @@
+{
+  "diseases": [
+    {
+      "id": "asthma",
+      "name": "Asthma",
+      "description": "A chronic respiratory condition causing airway inflammation and breathing difficulties.",
+      "symptoms": ["wheezing", "shortness of breath", "chest tightness", "coughing", "difficulty breathing", "breathing problems", "tight chest", "whistling sound when breathing"],
+      "causes": ["Allergens (pollen, dust, pet dander)", "Respiratory infections", "Physical activity", "Cold air", "Air pollution", "Stress"],
+      "prevention": [
+        "Identify and avoid triggers",
+        "Use prescribed inhalers regularly",
+        "Keep indoor air clean",
+        "Get vaccinated for flu and pneumonia",
+        "Monitor breathing with peak flow meter"
+      ],
+      "severity": "chronic",
+      "seekHelp": "If experiencing severe breathing difficulty or blue lips"
+    },
+    {
+      "id": "flu",
+      "name": "Influenza (Flu)",
+      "description": "A contagious respiratory illness caused by influenza viruses.",
+      "symptoms": ["fever", "chills", "muscle aches", "body aches", "fatigue", "tiredness", "headache", "dry cough", "sore throat", "runny nose", "congestion"],
+      "causes": ["Influenza A or B viruses", "Airborne transmission", "Contact with infected surfaces"],
+      "prevention": [
+        "Get annual flu vaccination",
+        "Wash hands frequently",
+        "Avoid close contact with sick people",
+        "Cover mouth when coughing",
+        "Stay home when sick"
+      ],
+      "severity": "moderate",
+      "seekHelp": "If symptoms worsen after initial improvement or difficulty breathing occurs"
+    },
+    {
+      "id": "bronchitis",
+      "name": "Bronchitis",
+      "description": "Inflammation of the bronchial tubes that carry air to the lungs.",
+      "symptoms": ["persistent cough", "mucus production", "phlegm", "chest discomfort", "fatigue", "shortness of breath", "low fever", "chills", "sore throat"],
+      "causes": ["Viral infections", "Bacterial infections", "Smoking", "Air pollution", "Dust exposure"],
+      "prevention": [
+        "Quit smoking",
+        "Avoid lung irritants",
+        "Wash hands frequently",
+        "Wear a mask in polluted areas",
+        "Get vaccinated against flu"
+      ],
+      "severity": "moderate",
+      "seekHelp": "If cough lasts more than 3 weeks or produces blood"
+    },
+    {
+      "id": "pneumonia",
+      "name": "Pneumonia",
+      "description": "An infection that inflames air sacs in one or both lungs.",
+      "symptoms": ["high fever", "severe cough", "chest pain", "difficulty breathing", "rapid breathing", "confusion", "fatigue", "nausea", "vomiting", "phlegm", "sweating", "shaking chills"],
+      "causes": ["Bacterial infection", "Viral infection", "Fungal infection", "Aspiration"],
+      "prevention": [
+        "Get pneumonia vaccine",
+        "Get annual flu shot",
+        "Practice good hygiene",
+        "Don't smoke",
+        "Keep immune system strong"
+      ],
+      "severity": "severe",
+      "seekHelp": "Immediately if experiencing high fever, severe chest pain, or difficulty breathing"
+    },
+    {
+      "id": "common_cold",
+      "name": "Common Cold",
+      "description": "A viral infection of the upper respiratory tract.",
+      "symptoms": ["runny nose", "stuffy nose", "sneezing", "sore throat", "mild cough", "mild headache", "mild body aches", "low grade fever", "congestion"],
+      "causes": ["Rhinoviruses", "Coronavirus", "RSV", "Parainfluenza"],
+      "prevention": [
+        "Wash hands frequently",
+        "Avoid touching face",
+        "Stay away from sick people",
+        "Disinfect surfaces",
+        "Get adequate sleep"
+      ],
+      "severity": "mild",
+      "seekHelp": "If symptoms persist beyond 10 days or worsen significantly"
+    }
+  ],
+  "symptomWeights": {
+    "wheezing": { "asthma": 0.9, "bronchitis": 0.4, "pneumonia": 0.3 },
+    "shortness of breath": { "asthma": 0.8, "pneumonia": 0.7, "bronchitis": 0.5 },
+    "chest tightness": { "asthma": 0.8, "bronchitis": 0.4, "pneumonia": 0.5 },
+    "persistent cough": { "bronchitis": 0.9, "pneumonia": 0.6, "asthma": 0.5 },
+    "high fever": { "pneumonia": 0.9, "flu": 0.8, "bronchitis": 0.3 },
+    "fever": { "flu": 0.8, "pneumonia": 0.7, "bronchitis": 0.4, "common_cold": 0.3 },
+    "chills": { "flu": 0.8, "pneumonia": 0.7 },
+    "muscle aches": { "flu": 0.9, "common_cold": 0.3 },
+    "body aches": { "flu": 0.9, "common_cold": 0.3 },
+    "fatigue": { "flu": 0.7, "bronchitis": 0.5, "pneumonia": 0.6, "common_cold": 0.4 },
+    "headache": { "flu": 0.6, "common_cold": 0.5 },
+    "sore throat": { "common_cold": 0.8, "flu": 0.6, "bronchitis": 0.4 },
+    "runny nose": { "common_cold": 0.9, "flu": 0.5 },
+    "stuffy nose": { "common_cold": 0.9, "flu": 0.4 },
+    "sneezing": { "common_cold": 0.9 },
+    "congestion": { "common_cold": 0.8, "flu": 0.5, "bronchitis": 0.3 },
+    "mucus": { "bronchitis": 0.8, "common_cold": 0.5, "pneumonia": 0.4 },
+    "phlegm": { "bronchitis": 0.9, "pneumonia": 0.6 },
+    "chest pain": { "pneumonia": 0.8, "bronchitis": 0.4 },
+    "difficulty breathing": { "pneumonia": 0.9, "asthma": 0.8, "bronchitis": 0.5 },
+    "rapid breathing": { "pneumonia": 0.8 },
+    "nausea": { "pneumonia": 0.4, "flu": 0.3 },
+    "sweating": { "pneumonia": 0.5, "flu": 0.4 }
+  }
+}
