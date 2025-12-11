@@ -13,6 +13,11 @@
         "Get vaccinated for flu and pneumonia",
         "Monitor breathing with peak flow meter"
       ],
+      "medicines": [
+        {"name": "Salbutamol Inhaler", "type": "Bronchodilator", "usage": "2 puffs as needed for breathing relief"},
+        {"name": "Cetirizine", "type": "Antihistamine", "usage": "10mg once daily for allergy-related symptoms"},
+        {"name": "Montelukast", "type": "Leukotriene modifier", "usage": "10mg at night (prescription required)"}
+      ],
       "severity": "chronic",
       "seekHelp": "If experiencing severe breathing difficulty or blue lips"
     },
@@ -28,6 +33,12 @@
         "Avoid close contact with sick people",
         "Cover mouth when coughing",
         "Stay home when sick"
+      ],
+      "medicines": [
+        {"name": "Paracetamol", "type": "Pain reliever/Fever reducer", "usage": "500-1000mg every 4-6 hours as needed"},
+        {"name": "Ibuprofen", "type": "Anti-inflammatory", "usage": "400mg every 6-8 hours with food"},
+        {"name": "Dextromethorphan", "type": "Cough suppressant", "usage": "10-20mg every 4 hours"},
+        {"name": "Vitamin C", "type": "Immune support", "usage": "1000mg daily"}
       ],
       "severity": "moderate",
       "seekHelp": "If symptoms worsen after initial improvement or difficulty breathing occurs"
@@ -45,6 +56,12 @@
         "Wear a mask in polluted areas",
         "Get vaccinated against flu"
       ],
+      "medicines": [
+        {"name": "Guaifenesin", "type": "Expectorant", "usage": "200-400mg every 4 hours to loosen mucus"},
+        {"name": "Bromhexine", "type": "Mucolytic", "usage": "8mg three times daily"},
+        {"name": "Honey with warm water", "type": "Natural remedy", "usage": "1-2 tablespoons as needed for soothing"},
+        {"name": "Paracetamol", "type": "Pain/Fever relief", "usage": "500mg every 6 hours if needed"}
+      ],
       "severity": "moderate",
       "seekHelp": "If cough lasts more than 3 weeks or produces blood"
     },
@@ -60,6 +77,11 @@
         "Practice good hygiene",
         "Don't smoke",
         "Keep immune system strong"
+      ],
+      "medicines": [
+        {"name": "Paracetamol", "type": "Fever reducer", "usage": "500-1000mg every 6 hours"},
+        {"name": "Oral Rehydration Salts", "type": "Hydration", "usage": "As directed to maintain hydration"},
+        {"name": "Note", "type": "Important", "usage": "Antibiotics required - MUST see doctor for prescription"}
       ],
       "severity": "severe",
       "seekHelp": "Immediately if experiencing high fever, severe chest pain, or difficulty breathing"
@@ -77,6 +99,13 @@
         "Disinfect surfaces",
         "Get adequate sleep"
       ],
+      "medicines": [
+        {"name": "Paracetamol", "type": "Pain/Fever relief", "usage": "500mg every 6 hours as needed"},
+        {"name": "Phenylephrine", "type": "Decongestant", "usage": "10mg every 4 hours for nasal congestion"},
+        {"name": "Lozenges", "type": "Sore throat relief", "usage": "1 lozenge every 2-3 hours"},
+        {"name": "Saline nasal spray", "type": "Nasal relief", "usage": "2-3 sprays per nostril as needed"},
+        {"name": "Vitamin C + Zinc", "type": "Immune support", "usage": "As directed on package"}
+      ],
       "severity": "mild",
       "seekHelp": "If symptoms persist beyond 10 days or worsen significantly"
     },
@@ -92,6 +121,13 @@
         "Maintain good ventilation",
         "Wash hands frequently",
         "Stay home when sick"
+      ],
+      "medicines": [
+        {"name": "Paracetamol", "type": "Fever/Pain relief", "usage": "500-1000mg every 6 hours"},
+        {"name": "Vitamin D3", "type": "Immune support", "usage": "1000-2000 IU daily"},
+        {"name": "Zinc", "type": "Immune support", "usage": "30-50mg daily"},
+        {"name": "Steam inhalation", "type": "Symptom relief", "usage": "10-15 minutes, 2-3 times daily"},
+        {"name": "Electrolyte drinks", "type": "Hydration", "usage": "Stay well hydrated"}
       ],
       "severity": "variable",
       "seekHelp": "If experiencing difficulty breathing, persistent chest pain, or confusion"
@@ -109,6 +145,12 @@
         "Shower after outdoor activities",
         "Take antihistamines as recommended"
       ],
+      "medicines": [
+        {"name": "Cetirizine", "type": "Antihistamine", "usage": "10mg once daily"},
+        {"name": "Loratadine", "type": "Antihistamine", "usage": "10mg once daily (non-drowsy)"},
+        {"name": "Fluticasone nasal spray", "type": "Corticosteroid spray", "usage": "1-2 sprays per nostril daily"},
+        {"name": "Saline nasal rinse", "type": "Nasal irrigation", "usage": "Once or twice daily"}
+      ],
       "severity": "mild",
       "seekHelp": "If symptoms significantly impact quality of life or don't respond to over-the-counter medications"
     },
@@ -124,6 +166,11 @@
         "Get flu and pneumonia vaccines",
         "Follow treatment plan consistently",
         "Stay active within limits"
+      ],
+      "medicines": [
+        {"name": "Salbutamol Inhaler", "type": "Short-acting bronchodilator", "usage": "2 puffs as needed"},
+        {"name": "Ipratropium Inhaler", "type": "Anticholinergic", "usage": "2 puffs 4 times daily"},
+        {"name": "Note", "type": "Important", "usage": "COPD requires medical management - see a pulmonologist"}
       ],
       "severity": "severe",
       "seekHelp": "Immediately if experiencing worsening breathlessness, blue lips, or mental confusion"

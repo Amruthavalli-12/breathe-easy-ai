@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Mic, Upload, Send, X, FileAudio, Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SymptomInputProps {
   onAnalyze: (symptoms: string, audioFile?: File) => void;
@@ -16,6 +17,7 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const { t } = useLanguage();
 
   const handleSubmit = () => {
     if (!symptoms.trim() && !audioFile) {
@@ -35,7 +37,7 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
       if (file.type.startsWith('audio/')) {
         setAudioFile(file);
         toast({
-          title: "Audio uploaded",
+          title: t('audioSelected'),
           description: `${file.name} ready for analysis.`
         });
       } else {
@@ -67,7 +69,7 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
         setAudioFile(file);
         stream.getTracks().forEach(track => track.stop());
         toast({
-          title: "Recording saved",
+          title: t('audioRecorded'),
           description: "Your voice recording is ready for analysis."
         });
       };
@@ -101,18 +103,11 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
     }
   };
 
-  const exampleSymptoms = [
-    "I have a persistent cough with phlegm",
-    "Fever, body aches, and fatigue",
-    "Wheezing and shortness of breath",
-    "Runny nose and sore throat"
-  ];
-
   return (
     <section id="screening" className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <div className="bg-card rounded-2xl shadow-medium border border-border/50 p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-foreground mb-2">Describe Your Symptoms</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-2">{t('analyzeSymptoms')}</h2>
           <p className="text-muted-foreground mb-6">
             Enter your symptoms in detail or record/upload audio of your cough or breathing.
           </p>
@@ -120,25 +115,11 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
           {/* Text Input */}
           <div className="space-y-4">
             <Textarea
-              placeholder="Example: I've been coughing for 3 days, have a fever, and feel very tired..."
+              placeholder={t('symptomsPlaceholder')}
               value={symptoms}
               onChange={(e) => setSymptoms(e.target.value)}
               className="min-h-[120px] resize-none bg-background border-input focus:ring-2 focus:ring-primary/20"
             />
-
-            {/* Example chips */}
-            <div className="flex flex-wrap gap-2">
-              <span className="text-xs text-muted-foreground">Try:</span>
-              {exampleSymptoms.map((example, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setSymptoms(example)}
-                  className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
-                >
-                  {example}
-                </button>
-              ))}
-            </div>
           </div>
 
           {/* Divider */}
@@ -156,7 +137,7 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
               className="flex-1"
             >
               <Mic className={`w-4 h-4 ${isRecording ? 'animate-pulse' : ''}`} />
-              {isRecording ? 'Stop Recording' : 'Record Audio'}
+              {isRecording ? t('stopRecording') : t('recordAudio')}
             </Button>
 
             <Button
@@ -165,7 +146,7 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
               className="flex-1"
             >
               <Upload className="w-4 h-4" />
-              Upload Audio
+              {t('uploadAudio')}
             </Button>
             <input
               ref={fileInputRef}
@@ -198,19 +179,19 @@ const SymptomInput = ({ onAnalyze, isLoading }: SymptomInputProps) => {
             {isLoading ? (
               <>
                 <Loader2 className="w-5 h-5 animate-spin" />
-                Analyzing...
+                {t('analyzing')}
               </>
             ) : (
               <>
                 <Send className="w-5 h-5" />
-                Analyze Symptoms
+                {t('analyzeSymptoms')}
               </>
             )}
           </Button>
 
           {/* Disclaimer */}
           <p className="text-xs text-muted-foreground text-center mt-4">
-            ⚕️ This tool provides informational screening only and is not a substitute for professional medical advice.
+            ⚕️ {t('disclaimer')}
           </p>
         </div>
       </div>
