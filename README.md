@@ -65,18 +65,6 @@ Medical tips
 
 Languages are switchable using a LanguageSelector component.
 
-💊 OTC Medicine Suggestions
-
-Expanded diseases.json now includes:
-
-Suitable OTC medicines
-
-When to use / avoid
-
-Dosage warnings
-
-Natural home remedies
-
 Integrated into:
 
 UI disease cards
