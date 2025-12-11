@@ -1,358 +1,272 @@
-🌬️ AI-Powered Respiratory Disease Screening Web Application (LangChain-Inspired)
+🌬️ AI-Powered Respiratory Disease Screening Web Application (Full-Stack + LangChain Prompt Engineering)
 
-An advanced medical screening web application designed to analyze symptoms or respiratory audio (cough, breath, voice) and intelligently predict likely respiratory diseases using LLM reasoning + rule-based medical knowledge.
+An end-to-end intelligent medical screening platform that analyzes symptoms, respiratory audio, and risk factors to predict possible respiratory diseases. Features multilanguage support, user authentication, AI reasoning, history dashboard, and medicine recommendations.
 
-Built using React, TypeScript, TailwindCSS, Lovable Cloud, and LangChain-style prompt engineering.
+Built using React + TypeScript + TailwindCSS + Lovable Cloud + Google Gemini 2.5 Flash with LangChain-inspired structured prompts.
 
-🌟 Features
-🔍 AI-Powered Screening
+🌟 Updated Full Feature List
+🤖 AI-Powered Diagnosis
 
-Uses Google Gemini 2.5 Flash through Lovable AI to analyze:
+Text-based symptom analysis
 
-User-entered symptoms
+Audio-based cough/breath/voice pattern detection
 
-Uploaded or recorded respiratory audio (cough / breath / voice)
+LangChain-style structured prompt reasoning
 
-Severity, duration, and risk factors (via prompt engineering)
+Gemini 2.5 Flash LLM
 
-🤖 LangChain-Inspired Prompt Engineering
+🔐 Authentication System (Email + Password)
 
-Implements a structured reasoning process:
+Signup & Login pages
 
-System role instructions
+Session management
 
-User input prompt template
+Protected routes
 
-Analytical steps (Identify → Compare → Score → Predict → Explain)
+User-specific history storage
 
-Chain-of-thought style reasoning (hidden)
+📊 History Dashboard
 
-🩺 Disease Coverage
+Stores all user analyses with:
 
-Predicts probability and severity for:
+Symptoms
 
-Asthma
+Detected diseases
 
-Flu
+Probabilities
 
-Bronchitis
+Medicines suggested
 
-Pneumonia
+Date & time
 
-Common Cold
+Stored securely in Lovable Cloud Database with Row-Level Security (RLS) enabled.
 
-COVID-19
+🌍 Multilanguage Support (i18n)
 
-COPD
+Fully localized UI in:
 
-Allergic Rhinitis
+🇬🇧 English
 
-📊 Interactive Probability Charts
+🇮🇳 Telugu
 
-Generated using Recharts:
-
-Bar charts
-
-Pie charts
-
-Confidence score indicators
-
-🎤 Audio Screening
-
-Users can:
-
-Upload audio (mp3, wav)
-
-Record directly from microphone
-System analyzes respiratory patterns such as:
-
-Wheeze
-
-Crackles
-
-Dry cough
-
-Wet cough
-
-Stridor
-
-Rhonchi
-
-💡 Recommendations
-
-Personalized:
-
-Home remedies
-
-Medication alerts (non-prescriptive)
-
-When to see a doctor
-
-Emergency warnings
-
-👨‍⚕️ Medical UI Design
-
-Professional medical aesthetic:
-
-Teal & blue palette
-
-Soft gradients
-
-Rounded cards
-
-Clinical typography
-
-Smooth fade animations
-
-🎯 Project Criteria
-✅ Prompt Quality (20%)
-
-Detailed, hierarchical system prompts
-
-LangChain-style PromptTemplate
-
-Clear formatting instructions
-
-Multiple medical reasoning examples
-
-Supports text, audio, and mixed input
-
-✅ Use of LangChain Concepts (25%)
-
-PromptTemplate-like structure
-
-Multi-step reasoning chain:
-
-Extract Symptoms
-
-Map to Disease Profiles
-
-Compute Probability Scores
-
-Cross-check with Audio Features
-
-Generate Final Summary
-
-Error handling & fallback strategy
-
-Modular prompts for:
-
-Audio analysis
-
-Symptom analysis
-
-Probability scoring
-
-✅ HTML + CSS UI (20%)
-
-Responsive React + Tailwind UI:
-
-Input form for symptoms
-
-Audio upload/record card
-
-Animated probability visualizations
-
-Disease explanation modals
-
-Prevention tips section
-
-✅ Deployment (20%)
-
-Fully deployed using Lovable Cloud:
-
-Integrated AI Gateway
-
-Edge function for medical reasoning
-
-Secure environment variables
-
-Production-ready build
-
-✅ GitHub Repo + README (15%)
+🇮🇳 Hindi
 
 Includes:
 
-Setup instructions
+Translated buttons
 
-Project structure
+Form labels
 
-Prompt engineering philosophy
+Disease names
 
-API endpoints
+Instructions
 
-Screenshots
+Medical tips
 
-Demo link
+Languages are switchable using a LanguageSelector component.
 
-🛠️ Technology Stack
-Layer	Tools
-Frontend	React, TypeScript, Tailwind CSS
-UI Components	shadcn-ui
-Charts	Recharts
-Backend	Lovable Cloud + Edge Functions
-AI Model	Google Gemini 2.5 Flash
-Prompt Engineering	LangChain-inspired templates
-Audio Processing	Built-in browser API + LLM interpretation
-🧠 LangChain-Inspired Prompt Engineering
-🧩 System Prompt Example
-You are an expert pulmonologist and respiratory diagnostic AI.
-Follow this structured process:
+💊 OTC Medicine Suggestions
 
-1. Extract symptoms from the user input.
-2. Match symptoms and audio features to known disease profiles.
-3. Calculate probability scores for each disease (0–100%).
-4. Consider severity, red flags, and risk factors.
-5. Provide:
-   - Disease ranking
-   - Probability chart data
-   - Matched symptoms
-   - Recommended next steps
-   - When to seek emergency care
+Expanded diseases.json now includes:
 
-Be concise, medical-grade, and accurate.
-Format the output in JSON.
+Suitable OTC medicines
 
-🗂️ User Prompt Template (LangChain Style)
-Analyze the following health input using the reasoning rules:
+When to use / avoid
 
+Dosage warnings
+
+Natural home remedies
+
+Integrated into:
+
+UI disease cards
+
+AI analysis result pages
+
+Downloadable reports
+
+🧠 Enhanced AI Edge Function
+
+Updated backend with:
+
+Symptom extraction
+
+Audio reasoning
+
+Knowledge-base cross-check
+
+Medicine recommendation module
+
+Severity scoring
+
+JSON output format
+
+Error handling
+
+🛡️ Database + RLS Policies
+
+History table schema:
+
+id
+user_id
+symptoms
+audio_features
+results_json
+created_at
+
+
+RLS ensures:
+
+Users can only read/write their own analysis records
+
+Admin policies can be added later
+
+🛠️ Technology Stack (Updated)
+Frontend
+
+React (Lovable)
+
+TypeScript
+
+Tailwind CSS
+
+shadcn/ui
+
+i18next
+
+Backend
+
+Lovable Cloud Functions
+
+Supabase-style database
+
+Authentication system
+
+Secure storage with RLS
+
+AI Model
+
+Google Gemini 2.5 Flash via Lovable AI Gateway
+
+LangChain-style prompt templates with multi-step reasoning
+
+Charts
+
+Recharts (Bar, Pie)
+
+🧠 LangChain-Inspired Prompt Engineering (Enhanced)
+🔧 System Prompt
+You are an advanced respiratory diagnostic AI with expertise in
+pulmonology, symptom analysis, and audio pattern recognition.
+
+Follow this reasoning chain:
+1. Extract symptoms and risk factors
+2. Analyze audio features if available
+3. Compare against disease profiles
+4. Compute probability scores (0–100)
+5. Select matching OTC medicines (if appropriate)
+6. Check for emergency indicators
+7. Generate structured JSON only
+
+🧩 User Prompt Template
 Symptoms: ${symptoms}
 Duration: ${duration}
 Audio Features: ${audioFeatures}
 Risk Factors: ${riskFactors}
+Preferred Language: ${language}
 
-Return only structured JSON.
+Return JSON with:
+- probabilities
+- explanation
+- matched symptoms
+- suggested medicines
+- severity
+- recommendations
 
-🧪 Edge Function (AI Backend)
-
-The respiratory-screen edge function:
-
-✔ Builds the complete prompt template
-✔ Sends request to Lovable AI Gateway
-✔ Merges audio + text reasoning
-✔ Returns structured JSON predictions
-✔ Handles:
-
-Timeouts
-
-Rate limits
-
-Missing input
-
-Audio errors
-
-Model fallback to rule-based engine
-
-🎨 Design System
-🎨 Colors
-
-Primary: Medical teal #2BA8A1
-
-Secondary: Healthcare blue #1D5FA7
-
-Accent: Soft mint #E7FFFB
-
-🧩 Components
-
-Card-based layout
-
-Animated result dashboard
-
-Glassmorphism for audio recorder
-
-Floating icons & wave patterns
-
-✨ Animations
-
-Fade-in charts
-
-Smooth transitions
-
-Pulse indicators for severity
-
-📱 Usage
-
-Enter your symptoms
-
-OR upload/record a cough or breath sample
-
-Click Analyze Health
-
-View:
-
-Disease probabilities
-
-Matching symptoms
-
-Explanation
-
-Prevention tips
-
-Download your report (optional)
-
-🧠 How the AI Works
-🧬 Hybrid Engine:
-
-LLM reasoning (Gemini)
-
-Rule-based medical knowledge base (diseases.json)
-
-Probability fusion via:
-
-Symptom match
-
-Audio feature match
-
-Severity rules
-
-🗂 Project Structure
+🧱 Project Structure (Updated)
 src/
  ├── components/
  │     ├── AudioRecorder.tsx
  │     ├── SymptomForm.tsx
  │     ├── ResultCharts.tsx
+ │     ├── LanguageSelector.tsx
+ │     └── Auth/
+ │            ├── Login.tsx
+ │            └── Signup.tsx
  ├── data/
  │     └── diseases.json
- ├── lib/
- │     └── promptBuilder.ts
  ├── pages/
- │     └── Home.tsx
+ │     ├── Home.tsx
+ │     ├── History.tsx
+ │     └── Profile.tsx
+ ├── lib/
+ │     ├── promptBuilder.ts
+ │     ├── aiAnalyzer.ts
+ │     └── auth.ts
 backend/
  └── respiratory-screen/
-       └── index.ts
+       ├── index.ts
+       └── types.ts
+
+🩺 Updated App Features
+✔ Symptom Input
+✔ Audio Upload + Recording
+✔ AI Analysis
+✔ Disease Probabilities
+✔ Medicines Explained
+✔ History Stored Per User
+✔ Multilingual UI
+✔ Login + Signup + Logout
+📦 Setup Instructions
+1️⃣ Clone repository
+git clone <YOUR_GIT_URL>
+cd respiratory-ai-screening
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Start dev server
+npm run dev
+
+4️⃣ Environment variables
+
+Set inside Lovable Cloud:
+
+AI API key
+
+DB URL
+
+Auth secret
 
 🌐 Deployment
 
-The app is fully deployed on Lovable Cloud:
+Using Lovable Cloud, you get:
 
-Backend auto-deployed to edge
+Auto-deployed frontend
 
-Environment variables secured
+Serverless AI edge functions
 
-Live AI inference
+Secure DB
 
-Fast global performance
+Authentication system
+
+Perfect production environment
 
 📄 License
 
-MIT License — Free for personal & commercial use.
+MIT License – free to use.
 
 🤝 Contributing
 
-Pull requests are welcome!
-You can also:
+Pull requests welcome:
 
-Add new diseases
+Add more diseases
 
-Improve UI/UX
+Enhance audio classifier
 
-Enhance audio analysis
+Improve multilingual support
 
-Expand prompt templates
-
-📧 Contact
-
-For questions or support, open an Issue on GitHub.# Welcome to your Lovable project
+Add doctor-connect feature
 
 ## Project info
 
