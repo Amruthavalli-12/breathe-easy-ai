@@ -1,11 +1,11 @@
-import { AnalysisResult } from '@/lib/symptomAnalyzer';
+import { AIAnalysisResult } from '@/lib/aiAnalyzer';
 import ResultsChart from './ResultsChart';
-import { AlertTriangle, CheckCircle, Info, ChevronDown, ChevronUp, Stethoscope, Shield, Lightbulb } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, ChevronDown, ChevronUp, Stethoscope, Shield, Lightbulb, Sparkles, Cpu } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
 interface ResultsSectionProps {
-  results: AnalysisResult | null;
+  results: AIAnalysisResult | null;
 }
 
 const ResultsSection = ({ results }: ResultsSectionProps) => {
@@ -45,9 +45,25 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
             <div className="p-3 rounded-xl bg-primary/10 text-primary">
               <Stethoscope className="w-6 h-6" />
             </div>
-            <div>
-              <h2 className="text-2xl font-bold text-foreground mb-2">Analysis Results</h2>
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <h2 className="text-2xl font-bold text-foreground">Analysis Results</h2>
+                {results.aiPowered ? (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary text-xs font-medium border border-primary/30">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    AI-Powered
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-muted-foreground text-xs font-medium">
+                    <Cpu className="w-3.5 h-3.5" />
+                    Rule-Based
+                  </span>
+                )}
+              </div>
               <p className="text-muted-foreground">{summary}</p>
+              {results.urgency && (
+                <p className="mt-2 text-sm text-warning font-medium">{results.urgency}</p>
+              )}
             </div>
           </div>
 
