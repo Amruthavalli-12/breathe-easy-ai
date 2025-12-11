@@ -5,11 +5,14 @@ import SymptomInput from '@/components/SymptomInput';
 import ResultsSection from '@/components/ResultsSection';
 import Footer from '@/components/Footer';
 import { analyzeWithAI, AIAnalysisResult } from '@/lib/aiAnalyzer';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [results, setResults] = useState<AIAnalysisResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuth();
 
   const handleAnalyze = async (symptoms: string, audioFile?: File) => {
     setIsLoading(true);
@@ -17,9 +20,9 @@ const Index = () => {
 
     try {
       let inputText = symptoms;
+      const hasAudio = !!audioFile;
       
       if (audioFile) {
-        // Acknowledge audio upload
         inputText = symptoms || "cough breathing difficulty respiratory symptoms";
         toast({
           title: "Audio received",
@@ -38,8 +41,31 @@ const Index = () => {
       }
 
       // Perform AI-powered analysis
-      const analysisResult = await analyzeWithAI(inputText);
+      const analysisResult = await analyzeWithAI(inputText, hasAudio);
       setResults(analysisResult);
+
+      // Save to history if user is logged in
+      if (user && analysisResult.predictions.length > 0) {
+        const { error } = await supabase
+          .from('analysis_history')
+          .insert({
+            user_id: user.id,
+            symptoms: inputText,
+            has_audio: hasAudio,
+            analysis_method: analysisResult.aiPowered ? 'ai' : 'rule-based',
+            predictions: analysisResult.predictions.map(p => ({
+              diseaseId: p.disease.id,
+              diseaseName: p.disease.name,
+              probability: p.probability,
+              matchedSymptoms: p.matchedSymptoms
+            })),
+            urgency: analysisResult.urgency || null
+          });
+
+        if (error) {
+          console.error('Failed to save history:', error);
+        }
+      }
 
       if (analysisResult.predictions.length === 0) {
         toast({

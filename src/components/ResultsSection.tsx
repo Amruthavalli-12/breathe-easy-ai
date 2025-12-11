@@ -1,8 +1,9 @@
 import { AIAnalysisResult } from '@/lib/aiAnalyzer';
 import ResultsChart from './ResultsChart';
-import { AlertTriangle, CheckCircle, Info, ChevronDown, ChevronUp, Stethoscope, Shield, Lightbulb, Sparkles, Cpu } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Info, ChevronDown, ChevronUp, Stethoscope, Shield, Lightbulb, Sparkles, Cpu, Pill } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ResultsSectionProps {
   results: AIAnalysisResult | null;
@@ -10,6 +11,7 @@ interface ResultsSectionProps {
 
 const ResultsSection = ({ results }: ResultsSectionProps) => {
   const [expandedDisease, setExpandedDisease] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   if (!results) return null;
 
@@ -31,9 +33,21 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
       severe: 'bg-destructive/10 text-destructive border-destructive/20',
       moderate: 'bg-warning/10 text-warning border-warning/20',
       mild: 'bg-accent/10 text-accent border-accent/20',
-      chronic: 'bg-primary/10 text-primary border-primary/20'
+      chronic: 'bg-primary/10 text-primary border-primary/20',
+      variable: 'bg-secondary text-secondary-foreground border-border'
     };
     return colors[severity as keyof typeof colors] || colors.mild;
+  };
+
+  const getSeverityLabel = (severity: string) => {
+    const labels: Record<string, string> = {
+      mild: t('mild'),
+      moderate: t('moderate'),
+      severe: t('severe'),
+      chronic: t('chronic'),
+      variable: t('variable')
+    };
+    return labels[severity] || severity;
   };
 
   return (
@@ -47,16 +61,16 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-2xl font-bold text-foreground">Analysis Results</h2>
+                <h2 className="text-2xl font-bold text-foreground">{t('analysisResults')}</h2>
                 {results.aiPowered ? (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary text-xs font-medium border border-primary/30">
                     <Sparkles className="w-3.5 h-3.5" />
-                    AI-Powered
+                    {t('aiPowered')}
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-muted-foreground text-xs font-medium">
                     <Cpu className="w-3.5 h-3.5" />
-                    Rule-Based
+                    {t('ruleBased')}
                   </span>
                 )}
               </div>
@@ -70,7 +84,7 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
           {/* Chart */}
           {predictions.length > 0 && (
             <div className="mt-8">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Disease Probability Distribution</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{t('topPredictions')}</h3>
               <ResultsChart predictions={predictions} />
             </div>
           )}
@@ -102,11 +116,11 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
                         <div className="flex items-center gap-2">
                           <h4 className="font-semibold text-foreground">{prediction.disease.name}</h4>
                           <span className={`text-xs px-2 py-0.5 rounded-full border ${getSeverityBadge(prediction.disease.severity)}`}>
-                            {prediction.disease.severity}
+                            {getSeverityLabel(prediction.disease.severity)}
                           </span>
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {prediction.probability}% probability • {prediction.matchedSymptoms.length} symptoms matched
+                          {prediction.probability}% {t('probability')} • {prediction.matchedSymptoms.length} {t('matchedSymptoms').toLowerCase()}
                         </p>
                       </div>
                     </div>
@@ -128,7 +142,7 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
 
                       {/* Matched Symptoms */}
                       <div>
-                        <h5 className="text-sm font-medium text-foreground mb-2">Matched Symptoms:</h5>
+                        <h5 className="text-sm font-medium text-foreground mb-2">{t('matchedSymptoms')}:</h5>
                         <div className="flex flex-wrap gap-2">
                           {prediction.matchedSymptoms.map((symptom, i) => (
                             <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary">
@@ -138,23 +152,34 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
                         </div>
                       </div>
 
-                      {/* Causes */}
-                      <div>
-                        <h5 className="text-sm font-medium text-foreground mb-2">Common Causes:</h5>
-                        <ul className="text-sm text-muted-foreground space-y-1">
-                          {prediction.disease.causes.slice(0, 4).map((cause, i) => (
-                            <li key={i} className="flex items-center gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                              {cause}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      {/* OTC Medicines */}
+                      {prediction.disease.medicines && prediction.disease.medicines.length > 0 && (
+                        <div>
+                          <h5 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+                            <Pill className="w-4 h-4" />
+                            {t('suggestedMedicines')}:
+                          </h5>
+                          <div className="space-y-2">
+                            {prediction.disease.medicines.map((med, i) => (
+                              <div key={i} className="p-3 rounded-lg bg-accent/5 border border-accent/20">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="font-medium text-sm text-foreground">{med.name}</span>
+                                  <span className="text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent">{med.type}</span>
+                                </div>
+                                <p className="text-xs text-muted-foreground">{med.usage}</p>
+                              </div>
+                            ))}
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-2 italic">
+                            ⚠️ {t('medicineDisclaimer')}
+                          </p>
+                        </div>
+                      )}
 
                       {/* When to Seek Help */}
                       <div className="p-3 rounded-lg bg-warning/10 border border-warning/20">
                         <p className="text-sm text-warning font-medium">
-                          ⚠️ Seek medical help: {prediction.disease.seekHelp}
+                          ⚠️ {t('whenToSeekHelp')}: {prediction.disease.seekHelp}
                         </p>
                       </div>
                     </div>
@@ -171,7 +196,7 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
             <div className="p-2.5 rounded-xl bg-accent/10 text-accent">
               <Shield className="w-5 h-5" />
             </div>
-            <h3 className="text-xl font-bold text-foreground">Recommendations</h3>
+            <h3 className="text-xl font-bold text-foreground">{t('recommendations')}</h3>
           </div>
 
           <div className="grid gap-3">
@@ -186,7 +211,7 @@ const ResultsSection = ({ results }: ResultsSectionProps) => {
           {/* Disclaimer */}
           <div className="mt-6 p-4 rounded-lg bg-muted border border-border">
             <p className="text-xs text-muted-foreground">
-              <strong>Important Disclaimer:</strong> This AI screening tool is for informational purposes only and does not constitute medical advice, diagnosis, or treatment. Always consult with a qualified healthcare professional for any health concerns.
+              <strong>Important:</strong> {t('disclaimer')}
             </p>
           </div>
 

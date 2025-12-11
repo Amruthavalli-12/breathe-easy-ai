@@ -1,6 +1,9 @@
 import { Activity, Shield, Zap } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HeroSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background gradient */}
@@ -14,17 +17,15 @@ const HeroSection = () => {
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 animate-fade-in">
             <Activity className="w-4 h-4" />
-            AI-Powered Health Screening
+            {t('aiPowered')}
           </div>
           
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-slide-up">
-            Check Your{' '}
-            <span className="text-gradient">Respiratory</span>{' '}
-            Health
+            {t('heroTitle')}
           </h1>
           
           <p className="text-lg sm:text-xl text-muted-foreground mb-10 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Describe your symptoms and get instant AI-powered analysis for common respiratory conditions like asthma, flu, bronchitis, and more.
+            {t('heroSubtitle')}
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 sm:gap-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
